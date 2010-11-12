@@ -1,0 +1,78 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=UTF-8" />
+<title>Untitled Document</title>
+<style>
+#featured-posts{
+	width:300px;
+}
+#featured-posts .main{
+	float:left;
+	width:200px;
+}
+#featured-posts .main img{
+	width:200px;
+}
+#featured-posts .thumb{
+	float:left;
+	width:100px;
+}
+#featured-posts .thumb img{
+	width:100px;
+}
+</style>
+</head>
+<body>
+<div class="wrapper" id="featured-posts">
+	<div class="main"></div>
+	<div class="thumb"></div>
+	<div class="thumb"></div>
+</div>
+<script src="//ajax.googleapis.com/ajax/libs/jquery/1.4.2/jquery.js"></script>
+<script>
+var featured_posts = [
+	{
+		'title':'Post1',
+		'url':'/post-1/',
+		'thumb':'1.gif'
+	},
+	{
+		'title':'Post2',
+		'url':'/post-2/',
+		'thumb':'2.gif'
+	},
+	{
+		'title':'Post3',
+		'url':'/post-3/',
+		'thumb':'3.gif'
+	},
+];
+function show(num){
+	if(featured_posts[num]){
+		$('#featured-posts .main').html('<img src="'+featured_posts[num]['thumb']+'" alt="asdasd" />').click(function(){
+			document.location.href = featured_posts[num]['url'];
+		});
+		var thumb_num = $('#featured-posts .thumb').length;
+		var current = num;
+		var count = 0;
+		var my_current = Array;
+		for(i=0;i<thumb_num;i++){
+			if(featured_posts[current+1]){
+				current = current+1;
+			} else {
+				current = 0;
+			}
+			my_current[count] = current;
+			$('#featured-posts .thumb:eq('+count+')').html('<img src="'+featured_posts[current]['thumb']+'" alt="'+featured_posts[current]['title']+'" />');
+			$('#featured-posts .thumb:eq('+count+')').bind('click',{current:current},function(event){
+				show(event.data.current);
+			});
+			count++;
+		}
+	}
+}
+show(0);
+</script>
+</body>
+</html>
