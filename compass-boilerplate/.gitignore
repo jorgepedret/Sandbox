@@ -1,0 +1,6 @@
+.svn/
+publish/
+build/buildinfo.properties
+.DS_Store
+.sass-cache
+Sandbox.esproj
